@@ -1,0 +1,612 @@
+:root {
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: #e8eaf0;
+    background: #101116;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    background: radial-gradient(circle at top, #202536 0%, #101116 50%);
+
+    color: #e8eaf0;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button,
+input {
+    outline: none;
+}
+
+.app {
+    width: min(1100px, calc(100% - 32px));
+
+    margin: 0 auto;
+
+    padding: 48px 0;
+}
+
+.header {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    margin: 0 0 6px;
+
+    font-size: 2rem;
+}
+
+.header p {
+    margin: 0;
+
+    color: #9298a8;
+}
+
+.button {
+    border: 0;
+    border-radius: 9px;
+
+    padding: 10px 16px;
+
+    color: white;
+    background: #5967ed;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+.button:hover {
+    background: #6977f5;
+}
+
+.button:active {
+    transform: scale(0.97);
+}
+
+.button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+.controls,
+.practice-container {
+    border: 1px solid #292d38;
+    border-radius: 16px;
+
+    background: rgba(23, 25, 32, 0.92);
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 18px;
+
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.control-group > label:not(.toggle) {
+    color: #aeb3c0;
+
+    white-space: nowrap;
+}
+
+.toggle {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.toggle input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.slider {
+    position: relative;
+
+    width: 42px;
+    height: 24px;
+
+    border-radius: 999px;
+
+    background: #383d49;
+
+    transition: background 0.15s ease;
+}
+
+.slider::after {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: transform 0.15s ease;
+}
+
+.toggle input:checked + .slider {
+    background: #6977f5;
+}
+
+.toggle input:checked + .slider::after {
+    transform: translateX(18px);
+}
+
+input[type="number"] {
+    width: 72px;
+
+    padding: 8px 9px;
+
+    color: #f3f4f7;
+    background: #101218;
+
+    border: 1px solid #343946;
+    border-radius: 8px;
+
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #6977f5;
+
+    box-shadow: 0 0 0 2px rgba(105, 119, 245, 0.12);
+}
+
+.paragraph-length {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+}
+
+.range-inputs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #777e8e;
+
+    font-size: 0.9rem;
+}
+
+.stats {
+    display: flex;
+
+    gap: 24px;
+
+    margin-left: auto;
+}
+
+.stats div {
+    display: grid;
+
+    gap: 2px;
+
+    text-align: right;
+}
+
+.stats span {
+    color: #777e8e;
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+.stats strong {
+    font-size: 1rem;
+}
+
+.practice-container {
+    padding: 28px;
+}
+
+.dictionary-status {
+    margin-bottom: 18px;
+
+    color: #777e8e;
+
+    font-size: 0.8rem;
+}
+
+.dictionary-status.ready {
+    color: #7dcf95;
+}
+
+.dictionary-status.error {
+    color: #ff8c98;
+}
+
+.paragraph-display {
+    min-height: 190px;
+
+    margin-bottom: 24px;
+
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+
+    line-height: 1.9;
+
+    letter-spacing: 0.01em;
+}
+
+.word {
+    border-radius: 4px;
+
+    padding: 2px 1px;
+
+    transition:
+        color 0.08s ease,
+        background 0.08s ease;
+}
+
+.word.current {
+    background: rgba(105, 119, 245, 0.14);
+}
+
+.character {
+    white-space: pre-wrap;
+}
+
+.character.correct {
+    color: #9ce6b1;
+}
+
+.character.incorrect-character {
+    color: #ff8c98;
+
+    text-decoration-line: underline;
+
+    text-decoration-thickness: 2px;
+}
+
+.word.blacked-out {
+    color: #08090c;
+
+    background: #08090c;
+
+    border-radius: 3px;
+
+    user-select: none;
+}
+
+.word.blacked-out .incorrect-character {
+    color: #ff8c98;
+
+    background: #08090c;
+}
+#typingInput {
+    display: block;
+
+    width: 100%;
+
+    min-height: 120px;
+
+    padding: 16px;
+
+    resize: vertical;
+
+    color: #e8eaf0;
+
+    background: #101218;
+
+    border: 1px solid #343946;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    line-height: 1.6;
+}
+
+#typingInput:focus {
+    border-color: #6977f5;
+
+    box-shadow: 0 0 0 3px rgba(105, 119, 245, 0.12);
+}
+
+#typingInput:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+.hint {
+    margin: 12px 0 0;
+
+    color: #737989;
+
+    font-size: 0.85rem;
+
+    line-height: 1.5;
+}
+
+@media (max-width: 850px) {
+    .stats {
+        width: 100%;
+
+        margin-left: 0;
+
+        justify-content: space-between;
+    }
+
+    .stats div {
+        text-align: left;
+    }
+}
+
+@media (max-width: 700px) {
+    .app {
+        padding: 24px 0;
+    }
+
+    .header {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .controls {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .paragraph-length {
+        width: 100%;
+    }
+
+    .stats {
+        width: 100%;
+    }
+}
+
+.control-label {
+    color: #aeb3c0;
+
+    white-space: nowrap;
+}
+
+.sr-only {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+.select-input {
+    padding: 8px 32px 8px 9px;
+
+    color: #f3f4f7;
+    background: #101218;
+
+    border: 1px solid #343946;
+    border-radius: 8px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.select-input:focus {
+    border-color: #6977f5;
+
+    box-shadow: 0 0 0 2px rgba(105, 119, 245, 0.12);
+}
+
+.paragraph-length[hidden] {
+    display: none;
+}
+
+.header-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.button-secondary {
+    color: #d7dae3;
+    background: #343946;
+}
+
+.button-secondary:hover {
+    background: #414656;
+}
+
+.results-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(5, 6, 10, 0.72);
+
+    backdrop-filter: blur(6px);
+
+    z-index: 1000;
+}
+
+.results-overlay[hidden] {
+    display: none;
+}
+
+.results-popup {
+    width: min(420px, 100%);
+
+    padding: 32px;
+
+    border: 1px solid #343946;
+    border-radius: 18px;
+
+    background: #171920;
+
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.results-popup h2 {
+    margin: 0;
+
+    font-size: 1.6rem;
+}
+
+.results-subtitle {
+    margin: 8px 0 24px;
+
+    color: #858b9b;
+}
+
+.results-stats {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+.results-stats div {
+    display: grid;
+
+    gap: 5px;
+
+    padding: 16px;
+
+    border: 1px solid #292d38;
+    border-radius: 10px;
+
+    background: #101218;
+
+    text-align: center;
+}
+
+.results-stats span {
+    color: #777e8e;
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+.results-stats strong {
+    font-size: 1.6rem;
+}
+
+.results-actions {
+    display: flex;
+
+    gap: 10px;
+}
+
+.results-actions .button {
+    flex: 1;
+}
+
+@media (max-width: 700px) {
+    .header-buttons {
+        width: 100%;
+    }
+
+    .header-buttons .button {
+        flex: 1;
+    }
+
+    .results-actions {
+        flex-direction: column;
+    }
+}

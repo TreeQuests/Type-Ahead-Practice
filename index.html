@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Type Ahead Practice</title>
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <main class="app">
+            <header class="header">
+                <div>
+                    <h1>Type Ahead Practice</h1>
+
+                    <p>Practice typing with randomly generated English text.</p>
+                </div>
+
+                <div class="header-buttons">
+                    <button
+                        type="button"
+                        id="restartButton"
+                        class="button button-secondary"
+                    >
+                        Restart
+                    </button>
+
+                    <button
+                        type="button"
+                        id="newParagraphButton"
+                        class="button"
+                    >
+                        New Paragraph
+                    </button>
+                </div>
+            </header>
+
+            <section class="controls">
+                <div class="control-group">
+                    <label for="paragraphSourceInput"> Paragraph source </label>
+
+                    <select id="paragraphSourceInput" class="select-input">
+                        <option value="random">Random words</option>
+
+                        <option value="built-in">Built-in paragraphs</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="toggle">
+                        <input id="readAheadToggle" type="checkbox" />
+
+                        <span class="slider"></span>
+
+                        <span>Force read-ahead</span>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label for="wordsAheadInput"> Words ahead </label>
+
+                    <input
+                        id="wordsAheadInput"
+                        type="number"
+                        min="0"
+                        max="50"
+                        value="3"
+                    />
+                </div>
+
+                <div class="control-group paragraph-length">
+                    <span class="control-label"> Paragraph length </span>
+
+                    <div class="range-inputs">
+                        <label>
+                            <span class="sr-only"> Minimum words </span>
+
+                            <input
+                                id="minWordsInput"
+                                type="number"
+                                min="1"
+                                max="5000"
+                                value="40"
+                            />
+                        </label>
+
+                        <span>to</span>
+
+                        <label>
+                            <span class="sr-only"> Maximum words </span>
+
+                            <input
+                                id="maxWordsInput"
+                                type="number"
+                                min="1"
+                                max="5000"
+                                value="80"
+                            />
+                        </label>
+
+                        <span>words</span>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div>
+                        <span>WPM</span>
+                        <strong id="wpm">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Accuracy</span>
+                        <strong id="accuracy">100%</strong>
+                    </div>
+
+                    <div>
+                        <span>Progress</span>
+                        <strong id="progress">0%</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="practice-container">
+                <div id="dictionaryStatus" class="dictionary-status">
+                    Loading dictionary...
+                </div>
+
+                <div id="paragraphDisplay" class="paragraph-display"></div>
+
+                <textarea
+                    id="typingInput"
+                    placeholder="Start typing here..."
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    disabled
+                ></textarea>
+
+                <p class="hint">
+                    With read-ahead enabled, the current word plus the selected
+                    number of following words are hidden.
+                </p>
+            </section>
+        </main>
+
+        <div id="resultsOverlay" class="results-overlay" hidden>
+            <section
+                class="results-popup"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="resultsTitle"
+            >
+                <h2 id="resultsTitle">Paragraph Complete!</h2>
+
+                <p class="results-subtitle">Here are your results.</p>
+
+                <div class="results-stats">
+                    <div>
+                        <span>WPM</span>
+                        <strong id="resultsWpm">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Accuracy</span>
+                        <strong id="resultsAccuracy">100%</strong>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button
+                        type="button"
+                        id="resultsRestartButton"
+                        class="button button-secondary"
+                    >
+                        Restart
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resultsNewParagraphButton"
+                        class="button"
+                    >
+                        New Paragraph
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
